@@ -17,5 +17,8 @@ func TestWorkspace(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	actualName := terraform.Output(t, terraformOptions, "name")
+	actualOauthUrl := terraform.Output(t, terraformOptions, "oauth_http_url")
+
 	assert.Equal(t, "ws-test", actualName)
+	assert.Equal(t, "https://github.com", actualOauthUrl)
 }
