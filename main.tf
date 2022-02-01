@@ -11,3 +11,14 @@ resource "tfe_oauth_client" "github" {
   oauth_token      = var.github_pat
   service_provider = "github"
 }
+
+resource "tfe_variable" "env" {
+  for_each = var.environment
+
+  category     = "env"
+  description  = each.value.description
+  key          = each.key
+  sensitive    = each.value.sensitive
+  value        = each.value.value
+  workspace_id = tfe_workspace.ws.id
+}
