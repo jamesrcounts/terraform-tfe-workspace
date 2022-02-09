@@ -19,6 +19,17 @@ variable "environment" {
   }))
 }
 
+variable "variables" {
+  description = "(Optional) Map of terraform variables to create in the workspace."
+  default     = {}
+
+  type = map(object({
+    description = string
+    sensitive   = bool
+    value       = string
+  }))
+}
+
 variable "oauth_token_id" {
   description = "(Required) The token used to access the VCS provider."
   type        = string

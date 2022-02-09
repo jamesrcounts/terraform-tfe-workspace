@@ -29,6 +29,14 @@ module "test_ws" {
       value       = "I<3U"
     }
   }
+
+  variables = {
+    MY_PAT = {
+      description = "Secret token"
+      sensitive   = true
+      value       = "t0pS3cret"
+    }
+  }
 }
 
 data "tfe_workspace" "test_ws" {
@@ -54,4 +62,8 @@ output "repository_id" {
 
 output "my_secret_name" {
   value = data.tfe_variables.test.env.0.name
+}
+
+output "my_variable_name" {
+  value = data.tfe_variables.test.terraform.0.name
 }

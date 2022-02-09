@@ -19,3 +19,14 @@ resource "tfe_variable" "env" {
   value        = each.value.value
   workspace_id = tfe_workspace.ws.id
 }
+
+resource "tfe_variable" "terraform" {
+  for_each = var.variables
+
+  category     = "terraform"
+  description  = each.value.description
+  key          = each.key
+  sensitive    = each.value.sensitive
+  value        = each.value.value
+  workspace_id = tfe_workspace.ws.id
+}
