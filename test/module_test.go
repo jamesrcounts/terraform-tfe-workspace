@@ -18,7 +18,9 @@ func TestWorkspace(t *testing.T) {
 
 	actualName := terraform.Output(t, terraformOptions, "name")
 	actualSecretName := terraform.Output(t, terraformOptions, "my_secret_name")
+	actualRepositoryId := terraform.Output(t, terraformOptions, "repository_id")
 
 	assert.Equal(t, "ws-test", actualName)
 	assert.Equal(t, "MY_SECRET", actualSecretName)
+	assert.Equal(t, "jamesrcounts/terraform-tfe-workspace", actualRepositoryId)
 }

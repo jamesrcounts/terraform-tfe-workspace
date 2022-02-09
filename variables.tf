@@ -18,3 +18,13 @@ variable "environment" {
     value       = string
   }))
 }
+
+variable "oauth_token_id" {
+  description = "(Required) The token used to access the VCS provider."
+  type        = string
+}
+
+variable "repository_id" {
+  description = "(Required) The repository containing Terraform configuration for this workspace."
+  type        = string
+}

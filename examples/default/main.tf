@@ -1,12 +1,26 @@
+resource "random_pet" "project" {}
+
 resource "tfe_organization" "org" {
-  name  = "test-workspaces"
+  name  = "test-${random_pet.project.id}"
   email = "nobody@example.com"
 }
 
+resource "tfe_oauth_client" "github" {
+  organization     = tfe_organization.org.name
+  api_url          = "https://api.github.com"
+  http_url         = "https://github.com"
+  oauth_token      = var.github_pat
+  service_provider = "github"
+}
+
 module "test_ws" {
-  source            = "../../"
+  source = "../../"
+
   name              = "ws-test"
   organization_name = tfe_organization.org.name
+
+  repository_id  = "jamesrcounts/terraform-tfe-workspace"
+  oauth_token_id = tfe_oauth_client.github.oauth_token_id
 
   environment = {
     MY_SECRET = {
@@ -18,6 +32,8 @@ module "test_ws" {
 }
 
 data "tfe_workspace" "test_ws" {
+  depends_on = [module.test_ws]
+
   name         = module.test_ws.name
   organization = tfe_organization.org.name
 }
@@ -30,6 +46,10 @@ data "tfe_variables" "test" {
 
 output "name" {
   value = data.tfe_workspace.test_ws.name
+}
+
+output "repository_id" {
+  value = data.tfe_workspace.test_ws.vcs_repo.0.identifier
 }
 
 output "my_secret_name" {

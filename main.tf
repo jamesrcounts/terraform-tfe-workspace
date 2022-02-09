@@ -2,6 +2,11 @@ resource "tfe_workspace" "ws" {
   name         = var.name
   organization = var.organization_name
   tag_names    = []
+
+  vcs_repo {
+    identifier     = var.repository_id
+    oauth_token_id = var.oauth_token_id
+  }
 }
 
 resource "tfe_variable" "env" {
