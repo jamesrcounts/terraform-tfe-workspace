@@ -28,3 +28,9 @@ variable "repository_id" {
   description = "(Required) The repository containing Terraform configuration for this workspace."
   type        = string
 }
+
+variable "terraform_directory" {
+  default     = ""
+  description = "(Optional) The directory that Terraform will execute within."
+  type        = string
+}

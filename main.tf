@@ -1,7 +1,7 @@
 resource "tfe_workspace" "ws" {
-  name         = var.name
-  organization = var.organization_name
-  tag_names    = []
+  name              = var.name
+  organization      = var.organization_name
+  working_directory = var.terraform_directory
 
   vcs_repo {
     identifier     = var.repository_id

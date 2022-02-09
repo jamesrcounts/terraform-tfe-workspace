@@ -16,11 +16,11 @@ resource "tfe_oauth_client" "github" {
 module "test_ws" {
   source = "../../"
 
-  name              = "ws-test"
-  organization_name = tfe_organization.org.name
-
-  repository_id  = "jamesrcounts/terraform-tfe-workspace"
-  oauth_token_id = tfe_oauth_client.github.oauth_token_id
+  name                = "ws-test"
+  oauth_token_id      = tfe_oauth_client.github.oauth_token_id
+  organization_name   = tfe_organization.org.name
+  repository_id       = "jamesrcounts/terraform-tfe-workspace"
+  terraform_directory = "examples/default"
 
   environment = {
     MY_SECRET = {
