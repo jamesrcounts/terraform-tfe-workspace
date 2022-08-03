@@ -49,22 +49,87 @@ module "test_ws" {
 }
 ```
 
-## Inputs
+## Required Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Map of environment variables to create in the workspace. | <pre>map(object({<br>    description = string<br>    sensitive   = bool<br>    value       = string<br>  }))</pre> | `{}` | no |
-| <a name="input_name"></a> [name](#input\_name) | (Required) The workspace name. | `string` | n/a | yes |
-| <a name="input_oauth_token_id"></a> [oauth\_token\_id](#input\_oauth\_token\_id) | (Required) The token used to access the VCS provider. | `string` | n/a | yes |
-| <a name="input_organization_name"></a> [organization\_name](#input\_organization\_name) | (Required) The organization to create the workspace in. | `string` | n/a | yes |
-| <a name="input_repository_id"></a> [repository\_id](#input\_repository\_id) | (Required) The repository containing Terraform configuration for this workspace. | `string` | n/a | yes |
-| <a name="input_terraform_directory"></a> [terraform\_directory](#input\_terraform\_directory) | (Optional) The directory that Terraform will execute within. | `string` | `""` | no |
-| <a name="input_variables"></a> [variables](#input\_variables) | (Optional) Map of terraform variables to create in the workspace. | <pre>map(object({<br>    description = string<br>    sensitive   = bool<br>    value       = string<br>  }))</pre> | `{}` | no |
+The following input variables are required:
+
+### <a name="input_name"></a> [name](#input\_name)
+
+Description: (Required) The workspace name.
+
+Type: `string`
+
+### <a name="input_oauth_token_id"></a> [oauth\_token\_id](#input\_oauth\_token\_id)
+
+Description: (Required) The token used to access the VCS provider.
+
+Type: `string`
+
+### <a name="input_organization_name"></a> [organization\_name](#input\_organization\_name)
+
+Description: (Required) The organization to create the workspace in.
+
+Type: `string`
+
+### <a name="input_repository_id"></a> [repository\_id](#input\_repository\_id)
+
+Description: (Required) The repository containing Terraform configuration for this workspace.
+
+Type: `string`
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### <a name="input_environment"></a> [environment](#input\_environment)
+
+Description: (Optional) Map of environment variables to create in the workspace.
+
+Type:
+
+```hcl
+map(object({
+    description = string
+    sensitive   = bool
+    value       = string
+  }))
+```
+
+Default: `{}`
+
+### <a name="input_terraform_directory"></a> [terraform\_directory](#input\_terraform\_directory)
+
+Description: (Optional) The directory that Terraform will execute within.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_variables"></a> [variables](#input\_variables)
+
+Description: (Optional) Map of terraform variables to create in the workspace.
+
+Type:
+
+```hcl
+map(object({
+    description = string
+    sensitive   = bool
+    value       = string
+  }))
+```
+
+Default: `{}`
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_id"></a> [id](#output\_id) | The workspace id. |
-| <a name="output_name"></a> [name](#output\_name) | The workspace name. |
+The following outputs are exported:
+
+### <a name="output_id"></a> [id](#output\_id)
+
+Description: The workspace id.
+
+### <a name="output_name"></a> [name](#output\_name)
+
+Description: The workspace name.
 <!-- END_TF_DOCS -->
